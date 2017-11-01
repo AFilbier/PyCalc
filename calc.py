@@ -64,6 +64,8 @@ def przeliczaj():
 #jezel to kolejne dzialanie to przenies do niego wynik poprzedniego
         if wynik == 0:
             wynik = eval(dzialanie)
+
+#dodac sprawdzanie niepelnych obliczen
         else:
             wynik = eval(str(wynik) + dzialanie)
 
