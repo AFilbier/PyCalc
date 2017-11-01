@@ -72,6 +72,7 @@ print("Basic semi fool-proof continuous calculator")
 print("Type 'quit' to exit the program. Type 'c' to reset")
 print("Calculator will ignore letters, most special characters and will remove any leading zeroes from numbers")
 
+
 while loop:
 
     przeliczaj()
