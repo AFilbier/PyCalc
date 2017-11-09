@@ -22,6 +22,7 @@ def przeliczaj():
     skladowe = []
     bez_widacych_zer = []
 
+
 #zeby prompt byl tylko na poczatku, po resecie, po wyniku 0
     if wynik == 0:
         if counter == 0:
@@ -60,9 +61,24 @@ def przeliczaj():
         if wynik == 0:
             wynik = eval(dzialanie)
 
-#dodac sprawdzanie niepelnych obliczen
+#Sprawdzenie czy sa tylko dopuszczalne operatory i czy nie ma podwojnych operatorow na poczatku (** jest dozwolone)
         else:
-            wynik = eval(str(wynik) + dzialanie)
+            if str(dzialanie)[0] == "+" or str(dzialanie)[0] == "-" or str(dzialanie)[0] == "/":
+                if str(dzialanie)[1] == "-" or str(dzialanie)[1] == "+" or str(dzialanie)[1] == "/" or str(dzialanie)[1] == "*":
+                    print("Wrong operator")
+                else:
+                    wynik = eval(str(wynik) + dzialanie)
+
+            elif str(dzialanie)[0] == "*":
+                if str(dzialanie)[1] == "*":
+                    wynik = eval(str(wynik) + dzialanie)
+                elif str(dzialanie)[1] == "-" or str(dzialanie)[1] == "+" or str(dzialanie)[1] == "/":
+                    print("Wrong operator")
+            else:
+                print("No valid operator")
+
+
+
 
 print("Basic semi fool-proof continuous calculator")
 print("Type 'quit' to exit the program. Type 'c' to reset")
