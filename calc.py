@@ -59,21 +59,26 @@ def przeliczaj():
 
 #jezel to kolejne dzialanie to przenies do niego wynik poprzedniego
         if wynik == 0:
-            wynik = eval(dzialanie)
+# jezeli znajdziesz niedozwolony podwojny operator w srodku dzialania to nie licz
+            if str(dzialanie).find("++") != -1 or str(dzialanie).find("+*") != -1 or str(dzialanie).find("+/") != -1 \
+                    or str(dzialanie).find("-+") != -1 or str(dzialanie).find("-*") != -1 or str(dzialanie).find("-/") != -1 \
+                    or str(dzialanie).find("/+") != -1 or str(dzialanie).find("/*") != -1 or str(dzialanie).find("//") != -1 \
+                    or str(dzialanie).find("*+") != -1 or str(dzialanie).find("*/") != -1:
+                print("Invalid operator!")
+            else:
+                wynik = eval(dzialanie)
 
-#Sprawdzenie czy sa tylko dopuszczalne operatory i czy nie ma podwojnych operatorow na poczatku (** jest dozwolone)
+#Sprawdzenie czy sa tylko dopuszczalne operatory i czy nie ma podwojnych operatorow na poczatku i w srodku (** i operajce z ujemnymi sa dozwolone)
         else:
-            if str(dzialanie)[0] == "+" or str(dzialanie)[0] == "-" or str(dzialanie)[0] == "/":
-                if str(dzialanie)[1] == "-" or str(dzialanie)[1] == "+" or str(dzialanie)[1] == "/" or str(dzialanie)[1] == "*":
-                    print("Wrong operator")
+#Kolejne dzialanie po pierwszym musi zaczynac sie operatorem
+            if str(dzialanie)[0] == "+" or str(dzialanie)[0] == "-" or str(dzialanie)[0] == "/" or str(dzialanie)[0] == "*":
+                if str(dzialanie).find("++") != -1 or str(dzialanie).find("+*") != -1 or str(dzialanie).find("+/") != -1 \
+                        or str(dzialanie).find("-+") != -1 or str(dzialanie).find("-*") != -1 or str(dzialanie).find("-/") != -1 \
+                        or str(dzialanie).find("/+") != -1 or str(dzialanie).find("/*") != -1 or str(dzialanie).find("//") != -1 \
+                        or str(dzialanie).find("*+") != -1 or str(dzialanie).find("*/") != -1:
+                        print("Invalid operator!")
                 else:
                     wynik = eval(str(wynik) + dzialanie)
-
-            elif str(dzialanie)[0] == "*":
-                if str(dzialanie)[1] == "*":
-                    wynik = eval(str(wynik) + dzialanie)
-                elif str(dzialanie)[1] == "-" or str(dzialanie)[1] == "+" or str(dzialanie)[1] == "/":
-                    print("Wrong operator")
             else:
                 print("No valid operator")
 
@@ -82,12 +87,11 @@ def przeliczaj():
 
 print("Basic semi fool-proof continuous calculator")
 print("Type 'quit' to exit the program. Type 'c' to reset")
-print("Calculator will ignore letters, most special characters and will remove any leading zeroes from numbers")
+print("Calculator will ignore letters, wrong operators, double operators, special characters and will remove any leading zeroes from numbers")
+print("Do note that operations as x--y are still totally valid")
 
 
 while loop:
 
     przeliczaj()
-
-
 
